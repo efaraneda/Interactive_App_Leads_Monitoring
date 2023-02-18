@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+  <title>Cotizaciones XYZ</title>
+  <style>
+    * {
+      margin: 50;
+      padding: 50;
+      font-family: sans-serif;
+    }
+    .chartMenu {
+      width: auto;
+      height: 40px;
+      background: #1A1A1A;
+      color: rgba(54, 162, 235, 1);
+    }
+    .chartMenu p {
+      padding: 10px;
+      font-size: 20px;
+    }
+    .chartCard {
+      width: auto;
+      height: auto;
+      background: rgba(54, 162, 235, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .chartBox {
+      width: auto;
+      padding: 50px;
+      border-radius: 50px;
+      border: solid 3px rgba(54, 162, 235, 1);
+      background: white;
+    }
+  </style>
+</head>
+
+        <h1 style="text-align: center;">{{ h1_title_text }}</h1>
+      <hr>  
+      <div class="card-body">
+        <canvas id="myChart"></canvas>
+      </div>
+
+    </div>
+      
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+
+
+          const labels = {{ orden }};
+          const data = {
+            labels: labels,
+            datasets: [{
+              label: {{ labeltext1 }},
+              backgroundColor: 
+          [
+            'rgb(230, 230, 230)'
+        ],
+              borderColor: [
+              'rgba(62, 0, 195, 1)'
+        ],
+        borderWidth: 3.5,
+        tension: 0,
+              data: {{ data  }},
+            },/* aquí queda el cuarto dataset (promedio)*/
+          
+          {
+              label: {{ labeltext4 }},
+              backgroundColor: 
+          [
+            'rgba(204, 255, 246, 1)'
+        ],
+              borderColor: [
+              'rgb(255, 255, 255)'
+        ],
+        borderWidth: 1.5,
+        tension: 0.3,
+        data: {{ prom  }},
+            },/* aquí queda el segundo dataset (limite superior del intervalo)*/{
+              label: {{ labeltext2 }},
+              backgroundColor: 
+          [
+          'rgba(0,0,0,0.2)'
+        ],
+              borderColor: [
+              'rgba(0, 0, 0,1)'
+        ],
+        borderWidth: 1.5,
+        tension: 0.3,
+        fill:1,
+              data: {{ ls  }},
+            },
+          /* aquí queda el tercer dataset (limite inferior del intervalo)*/
+          {
+              label: {{ labeltext3 }},
+              backgroundColor: 
+          [
+            'rgba(0,0,0,0.2)'
+        ],
+              borderColor: [
+              'rgba(0, 0, 0,1)'
+        ],
+        borderWidth: 1.5,
+        tension: 0.3,
+        fill:1,
+              data: {{ li  }},
+            }
+            
+             ]
+          };
+
+          const config = {
+            type: 'line',
+            data: data,
+            options: {
+                scales: {
+          y: {
+            stacked:false,
+            beginAtZero: false
+          }
+        }} 
+          };
+
+          // === include 'setup' then 'config' above ===
+
+          var myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+          );
+
+        </script>
+
+        <!-- Optional JavaScript; choose one of the two! -->
+
+        <!-- Option 1: Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+          crossorigin="anonymous"></script>
+
+<li style="text-align: center;"> <b>Frecuencia</b>: Reporte actualizado cada hora. 
+<li style="text-align: center;"> <b>Fuente</b>: Tabla "CotizacionUsuarioResumen" BD R&eacute;plica XYZ.
+<li style="text-align: center;"> <b>Observaci&oacute;n</b>: Los estimadores son calculados con la data disponible de la ficha nueva, a partir del d&iacute;a 07-02-2023 (fecha de lanzamiento ficha nueva).
+</body>
+
+</html>
